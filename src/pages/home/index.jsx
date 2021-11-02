@@ -6,7 +6,7 @@ import MaterialIcon from '@material/react-material-icon';
 
 import logo from '../../assets/logo.svg'
 import restaurant from '../../assets/restaurante-fake.png';
-import { Card } from '../../components';
+import { Card, RestaurantCard } from '../../components';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
@@ -47,6 +47,7 @@ const Home = () => {
             <Card photo={restaurant} title="nome restaurante" />
           </Carousel>
         </Search>
+        <RestaurantCard />
       </Container>
       <Map />
     </Wrapper>
