@@ -10,6 +10,7 @@ import { Card, RestaurantCard, Modal, Map } from '../../components';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
+  const [query, setQuery] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
 
   const settings = {
@@ -20,6 +21,12 @@ const Home = () => {
     slidesToScroll: 4,
     adaptiveHeight: true,
   };
+
+  function handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      setQuery(inputValue)
+    }
+  }
 
   return (
     <Wrapper>
@@ -32,6 +39,7 @@ const Home = () => {
           >
             <Input
               value={inputValue}
+              onKeyPress={handleKeyPress}
               onChange={(e) => setInputValue(e.target.value)}
             />
           </TextField>
@@ -50,7 +58,9 @@ const Home = () => {
         </Search>
         <RestaurantCard />
       </Container>
-      <Map />
+      <Map
+        query={query}
+      />
       {/* <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} /> */}
     </Wrapper>
   );
