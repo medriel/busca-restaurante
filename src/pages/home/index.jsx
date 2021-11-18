@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { Container, Carousel, Search, Logo, Wrapper, CarouselTitle } from './styles';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
+import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../../assets/logo.svg'
 import restaurant from '../../assets/restaurante-fake.png';
@@ -10,6 +11,7 @@ import { Card, RestaurantCard, Modal, Map } from '../../components';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
+  const { restaurants } = useSelector((state) => state.restaurants);
   const [query, setQuery] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
 
@@ -56,7 +58,9 @@ const Home = () => {
             <Card photo={restaurant} title="nome restaurante" />
           </Carousel>
         </Search>
-        <RestaurantCard />
+        {restaurants.map((restaurant) => (
+          <RestaurantCard restaurant={restaurant} />
+        ))}
       </Container>
       <Map
         query={query}
