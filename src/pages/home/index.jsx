@@ -47,15 +47,12 @@ const Home = () => {
           </TextField>
           <CarouselTitle>Na sua Área</CarouselTitle>
           <Carousel {...settings}>
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
-            <Card photo={restaurant} title="nome restaurante" />
+            {restaurants.map((restaurant) => (
+              <Card
+                key={restaurant.place_id}
+                photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
+                title={restaurant.name} />
+            ))}
           </Carousel>
         </Search>
         {restaurants.map((restaurant) => (
