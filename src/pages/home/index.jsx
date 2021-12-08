@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../../assets/logo.svg'
 import restaurant from '../../assets/restaurante-fake.png';
-import { Card, RestaurantCard, Modal, Map } from '../../components';
+import { Card, RestaurantCard, Modal, Map, Loader } from '../../components';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
@@ -52,15 +52,19 @@ const Home = () => {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </TextField>
-          <CarouselTitle>Na sua Área</CarouselTitle>
-          <Carousel {...settings}>
-            {restaurants.map((restaurant) => (
-              <Card
-                key={restaurant.place_id}
-                photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurant}
-                title={restaurant.name} />
-            ))}
-          </Carousel>
+          {restaurants.length > 0 ? (
+            <>
+              <CarouselTitle>Na sua Área</CarouselTitle>
+              <Carousel {...settings}>
+                {restaurants.map((restaurant) => (
+                  <Card
+                    key={restaurant.place_id}
+                    photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurant}
+                    title={restaurant.name} />
+                ))}
+              </Carousel>
+            </>
+          ) : <Loader />}
         </Search>
         {restaurants.map((restaurant) => (
           <RestaurantCard onClick={() => handleOpenModal(restaurant.placeId)} restaurant={restaurant} />
